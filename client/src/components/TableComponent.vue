@@ -45,7 +45,7 @@ const builds = ref<BuildModel[]>(
       buildId: 2,
       startTime: '2021-10-01T12:00:00Z',
       endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
+      status: 'failed',
       caption: 'Build #1',
       command: 'npm run build',
       errorsNumber: 0,
@@ -55,7 +55,7 @@ const builds = ref<BuildModel[]>(
       buildId: 3,
       startTime: '2021-10-01T12:00:00Z',
       endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
+      status: 'cancelled',
       caption: 'Build #1',
       command: 'npm run build',
       errorsNumber: 0,
@@ -148,16 +148,16 @@ const count = computed(() => builds.value.length)
     height: 24px;
     margin-right: 8px;
   }
-  border-left: 2px solid $borderColorGrey;
+  border-left: 3px solid $borderColorGrey;
 }
 .success {
-  border-left: 2px solid $cellGreen;
+  border-left: 3px solid $cellGreen;
 }
-.failure {
-  border-left: 2px solid $cellRed;
+.failed {
+  border-left: 3px solid $cellRed;
 }
 .cancelled {
-  border-left: 2px solid $cellGrey;
+  border-left: 3px solid $cellGrey;
 }
 
 .pagination {
