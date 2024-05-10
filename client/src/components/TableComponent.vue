@@ -181,6 +181,7 @@ table {
   border-radius: 8px;
   box-shadow: 0 0 0 1px $borderColorGrey;
   margin-bottom: 50px;
+  color:$textColorGrey;
   tr {
     height: 40px;
   }
