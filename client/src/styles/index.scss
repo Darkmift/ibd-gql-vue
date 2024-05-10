@@ -1,0 +1,45 @@
+@import 'fonts/index.scss';
+// background
+$bgColorWhite: #f7fafb;
+// text
+$textColorBlack: #17181c;
+$textColorGrey: #525765;
+$containerWidth: 1624px;
+$borderColorGrey: #d2d4da;
+$cellGreen: #00d2a2;
+$cellRed: #e12828;
+$cellGrey: #374a50;
+$headerGrey: #dfe5e7;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; // Ensures the body takes the full height of the viewport
+  width: 100%; // Ensures the body takes the full width of the viewport
+  display: flex;
+  background-color: $bgColorWhite;
+  font-family: $fontGordita500;
+}
+
+* {
+  font-family: $fontGordita500;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90vw;
+}
+.wrapper {
+  border: 1px solid $borderColorGrey;
+  border-radius: 8px;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  width: 100vw !important;
+  padding: 0;
+}
