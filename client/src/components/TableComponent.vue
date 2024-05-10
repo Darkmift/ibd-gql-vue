@@ -80,6 +80,108 @@ const builds = ref<BuildModel[]>(
       command: 'npm run build',
       errorsNumber: 0,
       warningsNumber: 0
+    },
+
+    {
+      buildId: 6,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 7,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'failed',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 8,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'cancelled',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 9,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 10,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    // add 5 more
+    {
+      buildId: 11,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 12,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'failed',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 13,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'cancelled',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 14,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
+    },
+    {
+      buildId: 15,
+      startTime: '2021-10-01T12:00:00Z',
+      endTime: '2021-10-01T12:30:00Z',
+      status: 'success',
+      caption: 'Build #1',
+      command: 'npm run build',
+      errorsNumber: 0,
+      warningsNumber: 0
     }
   ].map((b) => sortBuilds(b as BuildModel))
 )
@@ -181,7 +283,7 @@ table {
   border-radius: 8px;
   box-shadow: 0 0 0 1px $borderColorGrey;
   margin-bottom: 50px;
-  color:$textColorGrey;
+  color: $textColorGrey;
   tr {
     height: 40px;
   }
