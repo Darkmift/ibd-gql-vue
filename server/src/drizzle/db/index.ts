@@ -5,7 +5,8 @@ import { drizzle, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 import Database from 'better-sqlite3';
 
 const sqlite = new Database(config.DB_PATH, {
-  verbose: (args: unknown) => logger.info({ sqlite: args }),
+  verbose: (args: unknown) =>
+    config.RUN_DB_LOGS ? logger.info({ sqlite: args }) : null,
 });
 
 if (config.RUN_DB_LOGS) {
