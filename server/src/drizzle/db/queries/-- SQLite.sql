@@ -14,3 +14,5 @@ CREATE TABLE IF NOT EXISTS builds (
 
 -- SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type='table' AND name='builds';
+
+SELECT * FROM builds;
