@@ -34,7 +34,12 @@
     "rootDir": "src",
     "testRegex": ".*\\.(spec|unit|e2e|int)-test\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.json"
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
@@ -45,7 +50,13 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "globalSetup": "./jest.global-setup.ts",
-    "globalTeardown": "./jest.global-teardown.ts"
+    "globalTeardown": "./jest.global-teardown.ts",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "clover"
+    ]
   },
   "baseUrl": "./",
   "paths": {
@@ -57,6 +68,8 @@
     "*.{js,ts}": "npx eslint --fix --config ./eslint.config.js --debug"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.6.0",
     "cookie-parser": "^1.4.6",
@@ -65,7 +78,10 @@
     "drizzle-orm": "^0.30.10",
     "envalid": "^8.0.0",
     "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
+    "supertest-graphql": "^1.1.4",
     "winston": "^3.13.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
@@ -76,6 +92,7 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.11",
     "@types/supertest": "^6.0.2",
+    "apollo-server-testing": "3.0.0-alpha.3",
     "drizzle-kit": "^0.21.1",
     "eslint": "^9.2.0",
     "globals": "^15.2.0",
