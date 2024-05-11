@@ -5,10 +5,13 @@ import db from '@/drizzle/db';
 import { builds } from '@/drizzle/db/schema';
 import fs from 'fs';
 import path from 'path';
+import logger from '@/common/utils/logger';
 
+const currentPath = path.resolve();
 const pathToCSV = path.resolve(
-  __dirname,
-  '@/../../../../../assests/mock/json/MOCK_BUILDS_SEED.csv',
+  currentPath,
+  '..',
+  'assests/mock/json/MOCK_BUILDS_SEED.csv',
 );
 
 export default class DbTestSeeds {
@@ -43,9 +46,10 @@ export default class DbTestSeeds {
   }
 
   private filterUniqueBuilds() {
-    const data =this.getCsvData()
-    const uniqueBuilds = data.filter((build, index, self) =>
-      index === self.findIndex((t) => t.buildId === build.buildId),
+    const data = this.getCsvData();
+    const uniqueBuilds = data.filter(
+      (build, index, self) =>
+        index === self.findIndex((t) => t.buildId === build.buildId),
     );
     return uniqueBuilds;
   }
@@ -55,7 +59,7 @@ export default class DbTestSeeds {
     const buildsData: IBuild[] = this.filterUniqueBuilds();
     const newBuilds = await db
       .insert(builds)
-      .values(buildsData.slice(0, 20))
+      .values(buildsData)
       .returning({ insertedId: builds.buildId });
     return newBuilds;
   }
@@ -69,3 +73,15 @@ export default class DbTestSeeds {
     return await db.delete(builds);
   }
 }
+
+export const seedStaging = async () => {
+  // if builds table empty seed it
+  const dbTestSeeds = new DbTestSeeds();
+  const count = await dbTestSeeds.validate();
+  if (count === 0) {
+    await dbTestSeeds.insertBuilds();
+    logger.info('Seeding completed');
+    return;
+  }
+  logger.info('Seeding skipped -- already seeded');
+};
