@@ -1,6 +1,8 @@
 import 'tsconfig-paths/register';
-// import { seedData } from '@/common/drizzle/db';
+import DbTestSeeds from '@/drizzle/db/seed';
 
 export default async () => {
-  console.log('to be applied later')
+  const dbTestUtilsBuilds = new DbTestSeeds();
+  await dbTestUtilsBuilds.deleteAllBuilds();
+  await dbTestUtilsBuilds.insertBuilds();
 };

@@ -24,6 +24,13 @@
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}/server"
+    },
+    {
+      "command": "pnpm run drizzle:testing:studio",
+      "name": "Db Studio:test",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/server"
     }
   ]
 }
