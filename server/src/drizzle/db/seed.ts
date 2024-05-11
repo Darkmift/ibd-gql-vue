@@ -28,7 +28,7 @@ export default class DbTestSeeds {
         warningsNumber,
       ] = line.split(',');
       return {
-        buildId: buildId,
+        buildId,
         startTime,
         endTime,
         caption,
@@ -41,12 +41,21 @@ export default class DbTestSeeds {
 
     return csvToJsonData;
   }
+
+  private filterUniqueBuilds() {
+    const data =this.getCsvData()
+    const uniqueBuilds = data.filter((build, index, self) =>
+      index === self.findIndex((t) => t.buildId === build.buildId),
+    );
+    return uniqueBuilds;
+  }
+
   // insert a build
   public async insertBuilds() {
-    const buildsData: IBuild[] = this.getCsvData();
+    const buildsData: IBuild[] = this.filterUniqueBuilds();
     const newBuilds = await db
       .insert(builds)
-      .values(buildsData.slice(0, 10))
+      .values(buildsData.slice(0, 20))
       .returning({ insertedId: builds.buildId });
     return newBuilds;
   }
