@@ -4,6 +4,7 @@ describe('SeedService', () => {
   // test insert builds
   it('should insert builds', async () => {
     const seedService = new DbTestSeeds();
+    await seedService.deleteAllBuilds();
     const builds = await seedService.insertBuilds();
     // expect builds[0] to be an object of {buildId, startTime, endTime, caption, command, status, errorsNumber, warningsNumber}
     expect(builds[0]).toMatchObject({
