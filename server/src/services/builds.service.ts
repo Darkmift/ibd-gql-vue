@@ -1,7 +1,7 @@
 import { IBuild } from '@/types/build';
 import db from '@/drizzle/db';
 import { builds } from '@/drizzle/db/schema';
-import { eq, sql } from 'drizzle-orm';
+import { count, eq, sql } from 'drizzle-orm';
 
 export default class BuildsService {
   // insert a build (not in use in exec scope)
@@ -23,8 +23,14 @@ export default class BuildsService {
     return build;
   }
 
+  // get total count of builds
+  async getTotalBuilds() {
+    const result = await db.select({ count: count() }).from(builds);
+    return result[0].count;
+  }
+
   // get paginated
-  async getPaginatedBuilds(page: number, limit: number) {
+  async getPaginatedBuilds(page = 1, limit = 10) {
     const results = await db
       .select()
       .from(builds)
