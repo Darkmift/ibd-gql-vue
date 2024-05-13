@@ -61,8 +61,6 @@ const styles = {
 }
 </script>
 
-Script
-
 <template>
   <div class="graph-component container wrapper">
     <h1>Total builds</h1>
