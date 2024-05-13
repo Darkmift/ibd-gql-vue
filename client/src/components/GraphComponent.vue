@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { useBuildsStore } from '@/store'
+import { computed, onMounted } from 'vue'
+const store = useBuildsStore()
+const groupedbuildsByDate = computed(() => store.groupedBuilds)
+onMounted(() => {
+  store.setGroupedBuilds()
+})
+
+</script>
+
+Script
+
 <template>
   <div class="graph-component container wrapper">
     <h1>Total builds</h1>

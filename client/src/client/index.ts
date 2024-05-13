@@ -84,5 +84,6 @@ export const getBuildsGroupedByDay = async () => {
       }
     }
   `
-  return makeRequest<Promise<GroupedBuildModel[]>>({ query })
+  const result = await makeRequest<Promise<{ buildsGroupedByDay: GroupedBuildModel[] }>>({ query })
+  return result?.buildsGroupedByDay || []
 }
