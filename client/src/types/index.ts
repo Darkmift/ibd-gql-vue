@@ -10,3 +10,12 @@ export type BuildModel = {
   errorsNumber: number | null
   warningsNumber: number | null
 }
+
+export type GroupedBuildModel = {
+  day: string
+  count: number
+}
+
+export type BuildsCount = {
+  countBuilds: number
+}
