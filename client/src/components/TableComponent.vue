@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { BuildModel } from '@/types'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useBuildsStore } from '@/store'
+// Assets
 import cancelledSvg from '@/assets/svg/cancelled.svg?raw'
 import failedSvg from '@/assets/svg/failed.svg?raw'
 import successSvg from '@/assets/svg/success.svg?raw'
-import { useBuildsStore } from '@/store'
+import arrowLeftSvg from '@/assets/svg/arrowLeft.svg?raw'
+import arrowRightSvg from '@/assets/svg/arrowRight.svg?raw'
 
 const store = useBuildsStore()
 
@@ -32,16 +35,22 @@ const sortBuilds = (build: BuildModel) => {
     ) as BuildModel
 }
 
-onMounted(() => {
-  store.setBuilds(1, 10)
-})
-
 const pagination = computed(() => store.pagination)
 const builds = computed(() => store.builds.map((build) => sortBuilds(build)))
+const currentPage = computed(() => store.pagination.page)
+const limit = ref(50)
+const nextPage = computed(() => {
+  const nextPageNumber = pagination.value.page + 1
+  return nextPageNumber <= pagination.value.total ? nextPageNumber : null
+})
 
 const tableKeys = computed(() => {
   const buildObject = builds.value[0] || {}
   return Object.keys(sortBuilds(buildObject)).map((k) => customSortMap[k].string)
+})
+
+onMounted(() => {
+  store.setBuilds(1, limit.value)
 })
 
 // a fn that check status and return the right svg
@@ -65,57 +74,140 @@ const handlePagination = (action: 'increment' | 'decrement') => {
         ? 1
         : pagination.value.page + 1
       : pagination.value.page - 1
-  store.setBuilds(page, 10)
+  store.setBuilds(page, limit.value)
 }
 </script>
 
 <template>
-  <table class="container">
-    <thead>
-      <tr>
-        <th v-for="key in tableKeys" :key="key">
-          {{ key }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="build in builds" :key="build.buildId">
-        <td
-          v-for="(value, key) in build"
-          :key="key"
-          :class="key === 'status' ? `status ${value}` : ''"
-        >
-          <span v-if="key === 'status'">
-            <div class="svg-image" v-html="SvgImage(build.status)"></div>
-          </span>
-          <span>{{ value }}</span>
-        </td>
-      </tr>
-      <tr>
-        <td :colspan="tableKeys.length" class="pagination">
-          <div class="pagination-content">
-            <div class="total">{{ pagination.total }} <span class="total">total builds</span></div>
-            <div class="pagination-navs">
-              <button :disabled="pagination.page <= 1" @click="handlePagination('decrement')">
-                &lt;
-              </button>
-              <button @click="handlePagination('increment')">&gt;</button>
+  <div class="table-fix-head">
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in tableKeys" :key="key">
+            <span>{{ key }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="build in builds" :key="build.buildId">
+          <td v-for="(value, key) in build" :key="key">
+            <div :class="key === 'status' ? `status ${value}` : ''">
+              <div v-if="key === 'status'" class="svg-image" v-html="SvgImage(build.status)"></div>
+              <span>{{ value }}</span>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+        <tr>
+          <td :colspan="tableKeys.length" class="pagination">
+            <div class="pagination-content">
+              <div class="total">
+                {{ pagination.total }} <span class="total">total builds</span>
+              </div>
+              <div class="pagination-navs">
+                <button
+                  :disabled="currentPage <= 1"
+                  @click="handlePagination('decrement')"
+                  v-html="arrowLeftSvg"
+                ></button>
+                <span
+                  :class="{ highlighted: index + 1 === currentPage }"
+                  v-for="index in [currentPage - 1, currentPage]"
+                  :key="index"
+                >
+                  {{ index + 1 }}
+                </span>
+                <button
+                  :disabled="!nextPage"
+                  @click="handlePagination('increment')"
+                  v-html="arrowRightSvg"
+                ></button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.table-fix-head {
+  display: flex;
+  overflow: auto;
+  min-width: 900px;
+  width: 90vw;
+  height: 676px;
+  margin-top: 24px;
+  background-color: $bgColorWhite;
+  padding-bottom: 24px;
+}
+
+table {
+  white-space: nowrap;
+  flex: 1;
+  height: 100%;
+  overflow: scroll;
+  border-radius: 8px;
+  background-color: $headerGrey;
+  border-collapse: collapse;
+  border-style: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px $borderColorGrey;
+  color: $textColorGrey;
+  thead {
+    position: sticky;
+    box-shadow: 0 0 0 1px $borderColorGrey;
+    top: 0;
+    th {
+      background-color: $headerGrey;
+      &:first-child {
+        span {
+          padding-left: 20px;
+        }
+        padding-left: 0;
+        border-top-left-radius: 8px;
+      }
+      &:last-child {
+        border-top-right-radius: 8px;
+      }
+    }
+  }
+  td,
+  th {
+    height: 40px;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 12px;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+  tbody {
+    tr {
+      font-size: 16px;
+      border-bottom: 1px solid $borderColorGrey;
+      td {
+        text-align: left;
+        background-color: $bgColorWhite;
+      }
+    }
+  }
+}
+
+th:first-child,
+th:last-child {
+  border-radius: none;
+  border-left: none;
+  box-shadow: 0 0 0 5.6rem $bgColorWhite;
+}
+
 .status {
   display: flex;
   align-items: center;
-  height: 40px;
   line-height: 32px;
+  padding-left: 20px;
+  height: 100%;
   .svg-image {
-    // width: 24px;
     height: 24px;
     margin-right: 8px;
   }
@@ -141,77 +233,35 @@ const handlePagination = (action: 'increment' | 'decrement') => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 5px 20px;
     .total {
       font-size: 11px;
       color: $textColorGrey;
     }
 
     .pagination-navs {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      .highlighted {
+        padding: 0 4px;
+        color: $textColorWhite;
+        background-color: $textColorGrey;
+        border-radius: 50%;
+      }
       button {
-        background-color: rgb(113, 113, 192);
-        border: 1px solid $borderColorGrey;
-        border-radius: 4px;
-        padding: 4px 8px;
+        display: flex;
+        align-items: center;
+        border: none;
+        background: none;
+        padding: 0;
         font-size: 12px;
-        color: $textColorGrey;
+        color: rgba(110, 122, 125, 0.4);
         cursor: pointer;
-        &:hover {
-          background-color: $bgColorWhite;
-        }
         &:disabled {
           cursor: not-allowed;
-          color: $textColorGrey;
-          background-color: $bgColorWhite;
         }
       }
-    }
-  }
-}
-table {
-  border-radius: 8px;
-  margin-top: 20px;
-  width: 100%;
-  background-color: $headerGrey;
-  border-collapse: collapse;
-  border-style: hidden;
-  border-radius: 8px;
-  box-shadow: 0 0 0 1px $borderColorGrey;
-  margin-bottom: 50px;
-  color: $textColorGrey;
-  tr {
-    height: 40px;
-  }
-  td,
-  th {
-    text-align: left;
-    padding-left: 20px;
-    font-size: 12px;
-  }
-  thead {
-    width: 1624px;
-  }
-  tbody {
-    tr {
-      padding: 8px;
-      font-size: 16px;
-      border-bottom: 1px solid $borderColorGrey;
-      td {
-        text-align: left;
-        background-color: $bgColorWhite;
-      }
-      // &:last-child {
-      //   // border-bottom-left-radius: 8px;
-      //   // background-color: $bgColorWhite;
-      //   // td {
-      //   //   &:first-child {
-      //   //     border-bottom-left-radius: 8px;
-      //   //   }
-      //   //   &:last-child {
-      //   //     border-bottom-right-radius: 8px;
-      //   //   }
-      //   // }
-      // }
     }
   }
 }

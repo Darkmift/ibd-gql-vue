@@ -55,9 +55,9 @@ const chartOptions = {
 
 const styles = {
   position: 'relative',
-  height: '100%',
+  height: '203px',
   width: '100%',
-  paddingBottom: '3vmin'
+  // paddingBottom: '3vmin'
 }
 </script>
 
@@ -73,9 +73,10 @@ Script
 <style lang="scss" scoped>
 .graph-component {
   height: 280px;
+  overflow-y: hidden;
   top: 76px;
   left: 148px;
-  padding: 0px 16px 16px 16px;
+  padding: 0px 16px 0 16px;
   gap: 8px;
   border-radius: 8px;
   opacity: 0px;

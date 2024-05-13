@@ -1,9 +1,11 @@
 @import 'fonts/index.scss';
 // background
-$bgColorWhite: #f7fafb;
+$bgColorWhite: rgba(247, 250, 251, 1);
+$textColorWhite: #f7fafb;
 // text
 $textColorBlack: #17181c;
 $textColorGrey: rgba(82, 87, 101, 1);
+$bgColorGrey: rgba(55, 74, 80, 0.5);
 $containerWidth: 1624px;
 $borderColorGrey: #d2d4da;
 $cellGreen: rgba(0, 210, 162, 1);
@@ -28,31 +30,10 @@ html {
 }
 
 .container {
-  width: 90vw;
-  overflow-x: hidden;  
-
-  @media (max-width: 900px) {
-    width: 900px; 
-    overflow-x: auto;
-  }
+  overflow-x: hidden;
 }
 
 .wrapper {
   border: 1px solid $borderColorGrey;
   border-radius: 8px;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100%;
-  width: 100vw !important;
-  padding: 0;
-
-  @media (max-width: 1000px) {
-    width: 1000px;
-    overflow-x: scroll;
-    min-width: 900px;
-  }
 }
