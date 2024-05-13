@@ -207,6 +207,7 @@ th:last-child {
   line-height: 32px;
   padding-left: 20px;
   height: 100%;
+  text-transform: capitalize;
   .svg-image {
     height: 24px;
     margin-right: 8px;
