@@ -31,6 +31,20 @@
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}/server"
+    },
+    {
+      "command": "pnpm run dev",
+      "name": "Run Client",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/client"
+    },
+    {
+      "command": "pnpm run test:unit",
+      "name": "Run Client:test",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/client"
     }
   ]
 }
