@@ -8,6 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@types/echarts':
+        specifier: ^4.9.22
+        version: 4.9.22
+      '@vue/composition-api':
+        specifier: ^1.7.2
+        version: 1.7.2(vue@3.4.27(typescript@5.4.5))
+      '@vue/runtime-core':
+        specifier: ^3.4.27
+        version: 3.4.27
+      echarts:
+        specifier: ^5.5.0
+        version: 5.5.0
       envalid:
         specifier: ^8.0.0
         version: 8.0.0
@@ -16,13 +28,16 @@ importers:
         version: 7.0.1(graphql@16.8.1)
       pinia:
         specifier: ^2.1.7
-        version: 2.1.7(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
+        version: 2.1.7(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
       vite-svg-loader:
         specifier: ^5.1.0
         version: 5.1.0(vue@3.4.27(typescript@5.4.5))
       vue:
         specifier: ^3.4.21
         version: 3.4.27(typescript@5.4.5)
+      vue-echarts:
+        specifier: ^6.7.2
+        version: 6.7.2(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(@vue/runtime-core@3.4.27)(echarts@5.5.0)(vue@3.4.27(typescript@5.4.5))
       vue-router:
         specifier: ^4.3.0
         version: 4.3.2(vue@3.4.27(typescript@5.4.5))
@@ -648,6 +663,9 @@ packages:
   '@tsconfig/node20@20.1.4':
     resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
 
+  '@types/echarts@4.9.22':
+    resolution: {integrity: sha512-7Fo6XdWpoi8jxkwP7BARUOM7riq8bMhmsCtSG8gzUcJmFhLo387tihoBYS/y5j7jl3PENT5RxeWZdN9RiwO7HQ==}
+
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -665,6 +683,9 @@ packages:
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+
+  '@types/zrender@4.0.6':
+    resolution: {integrity: sha512-1jZ9bJn2BsfmYFPBHtl5o3uV+ILejAtGrDcYSpT4qaVKEI/0YY+arw3XHU04Ebd8Nca3SQ7uNcLaqiL+tTFVMg==}
 
   '@typescript-eslint/eslint-plugin@7.8.0':
     resolution: {integrity: sha512-gFTT+ezJmkwutUPmB0skOj3GZJtlEGnlssems4AjkVweUPGj7jRwwqg0Hhg7++kPGJqKtTYx+R05Ftww372aIg==}
@@ -792,6 +813,11 @@ packages:
 
   '@vue/compiler-ssr@3.4.27':
     resolution: {integrity: sha512-CVRzSJIltzMG5FcidsW0jKNQnNRYC8bT21VegyMMtHmhW3UOI7knmUehzswXLrExDLE6lQCZdrhD4ogI7c+vuw==}
+
+  '@vue/composition-api@1.7.2':
+    resolution: {integrity: sha512-M8jm9J/laYrYT02665HkZ5l2fWTK4dcVg3BsDHm/pfz+MjDYwX+9FUaZyGwEyXEDonQYRCo0H7aLgdklcIELjw==}
+    peerDependencies:
+      vue: '>= 2.5 < 2.7'
 
   '@vue/devtools-api@6.6.1':
     resolution: {integrity: sha512-LgPscpE3Vs0x96PzSSB4IGVSZXZBZHpfxs+ZA1d+VEPwHdOXowy/Y2CsvCAIFrf+ssVU1pD1jidj505EpUnfbA==}
@@ -1139,6 +1165,9 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
+
+  echarts@5.5.0:
+    resolution: {integrity: sha512-rNYnNCzqDAPCr4m/fqyUFv7fD9qIsd50S6GDFgO1DxZhncCsNsG7IfUlAlvZe5oSEQxtsjnHiUuppzccry93Xw==}
 
   editorconfig@1.0.4:
     resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
@@ -1866,6 +1895,9 @@ packages:
   requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
 
+  resize-detector@0.3.0:
+    resolution: {integrity: sha512-R/tCuvuOHQ8o2boRP6vgx8hXCCy87H1eY9V5imBYeVNyNVpuL9ciReSccLj2gDcax9+2weXy3bc8Vv+NRXeEvQ==}
+
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -2054,6 +2086,9 @@ packages:
   ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -2199,6 +2234,17 @@ packages:
   vue-component-type-helpers@2.0.16:
     resolution: {integrity: sha512-qisL/iAfdO++7w+SsfYQJVPj6QKvxp4i1MMxvsNO41z/8zu3KuAw9LkhKUfP/kcOWGDxESp+pQObWppXusejCA==}
 
+  vue-demi@0.13.11:
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
     engines: {node: '>=12'}
@@ -2208,6 +2254,19 @@ packages:
       vue: ^3.0.0-0 || ^2.6.0
     peerDependenciesMeta:
       '@vue/composition-api':
+        optional: true
+
+  vue-echarts@6.7.2:
+    resolution: {integrity: sha512-SG8Vmszhx24KjtySsk361DogZLRkPCyLhgoyh7iN1eH3WGJ0kyl3k0g4QiSJqK0+F1Ej0HDopq4A5OGcBlAwzw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.5
+      '@vue/runtime-core': ^3.0.0
+      echarts: ^5.4.1
+      vue: ^2.6.12 || ^3.1.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      '@vue/runtime-core':
         optional: true
 
   vue-eslint-parser@9.4.2:
@@ -2319,6 +2378,9 @@ packages:
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
+  zrender@5.5.0:
+    resolution: {integrity: sha512-O3MilSi/9mwoovx77m6ROZM7sXShR/O/JIanvzTwjN3FORfLSr81PsUGd7jlaYOeds9d8tw82oP44+3YucVo+w==}
 
 snapshots:
 
@@ -2807,6 +2869,10 @@ snapshots:
 
   '@tsconfig/node20@20.1.4': {}
 
+  '@types/echarts@4.9.22':
+    dependencies:
+      '@types/zrender': 4.0.6
+
   '@types/estree@1.0.5': {}
 
   '@types/jsdom@21.1.6':
@@ -2824,6 +2890,8 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/tough-cookie@4.0.5': {}
+
+  '@types/zrender@4.0.6': {}
 
   '@typescript-eslint/eslint-plugin@7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
@@ -3028,6 +3096,10 @@ snapshots:
     dependencies:
       '@vue/compiler-dom': 3.4.27
       '@vue/shared': 3.4.27
+
+  '@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5))':
+    dependencies:
+      vue: 3.4.27(typescript@5.4.5)
 
   '@vue/devtools-api@6.6.1': {}
 
@@ -3395,6 +3467,11 @@ snapshots:
       '@dprint/win32-x64': 0.45.1
 
   eastasianwidth@0.2.0: {}
+
+  echarts@5.5.0:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.5.0
 
   editorconfig@1.0.4:
     dependencies:
@@ -4054,12 +4131,13 @@ snapshots:
 
   pidtree@0.6.0: {}
 
-  pinia@2.1.7(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)):
+  pinia@2.1.7(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-api': 6.6.1
       vue: 3.4.27(typescript@5.4.5)
-      vue-demi: 0.14.7(vue@3.4.27(typescript@5.4.5))
+      vue-demi: 0.14.7(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(vue@3.4.27(typescript@5.4.5))
     optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.27(typescript@5.4.5))
       typescript: 5.4.5
 
   pkg-types@1.1.1:
@@ -4127,6 +4205,8 @@ snapshots:
   remeda@1.61.0: {}
 
   requires-port@1.0.0: {}
+
+  resize-detector@0.3.0: {}
 
   resolve-from@4.0.0: {}
 
@@ -4304,6 +4384,8 @@ snapshots:
 
   ts-toolbelt@9.6.0: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.6.2: {}
 
   type-check@0.4.0:
@@ -4462,9 +4544,27 @@ snapshots:
 
   vue-component-type-helpers@2.0.16: {}
 
-  vue-demi@0.14.7(vue@3.4.27(typescript@5.4.5)):
+  vue-demi@0.13.11(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(vue@3.4.27(typescript@5.4.5)):
     dependencies:
       vue: 3.4.27(typescript@5.4.5)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.27(typescript@5.4.5))
+
+  vue-demi@0.14.7(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(vue@3.4.27(typescript@5.4.5)):
+    dependencies:
+      vue: 3.4.27(typescript@5.4.5)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.27(typescript@5.4.5))
+
+  vue-echarts@6.7.2(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(@vue/runtime-core@3.4.27)(echarts@5.5.0)(vue@3.4.27(typescript@5.4.5)):
+    dependencies:
+      echarts: 5.5.0
+      resize-detector: 0.3.0
+      vue: 3.4.27(typescript@5.4.5)
+      vue-demi: 0.13.11(@vue/composition-api@1.7.2(vue@3.4.27(typescript@5.4.5)))(vue@3.4.27(typescript@5.4.5))
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.27(typescript@5.4.5))
+      '@vue/runtime-core': 3.4.27
 
   vue-eslint-parser@9.4.2(eslint@8.57.0):
     dependencies:
@@ -4563,3 +4663,7 @@ snapshots:
   yocto-queue@1.0.0: {}
 
   zod@3.23.8: {}
+
+  zrender@5.5.0:
+    dependencies:
+      tslib: 2.3.0
