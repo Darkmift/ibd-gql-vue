@@ -3,9 +3,9 @@ const typeDefs = `#graphql
 
   # Define status as an enum type
   enum Status {
-    SUCCESS
-    FAILED
-    CANCELLED
+    success
+    failed
+    cancelled
   }
 
   # Define a model for builds
@@ -15,7 +15,7 @@ const typeDefs = `#graphql
     endTime: String
     caption: String
     command: String
-    status: Status
+    status: String
     errorsNumber: Int
     warningsNumber: Int
   }
