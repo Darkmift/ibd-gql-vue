@@ -15,8 +15,8 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%; // Ensures the body takes the full height of the viewport
-  width: 100%; // Ensures the body takes the full width of the viewport
+  height: 100%;
+  width: 100%;
   display: flex;
   background-color: $bgColorWhite;
   font-family: $fontGordita500;
@@ -29,7 +29,14 @@ html {
 
 .container {
   width: 90vw;
+  overflow-x: hidden;  
+
+  @media (max-width: 900px) {
+    width: 900px; 
+    overflow-x: auto;
+  }
 }
+
 .wrapper {
   border: 1px solid $borderColorGrey;
   border-radius: 8px;
@@ -42,4 +49,10 @@ html {
   min-height: 100%;
   width: 100vw !important;
   padding: 0;
+
+  @media (max-width: 1000px) {
+    width: 1000px;
+    overflow-x: scroll;
+    min-width: 900px;
+  }
 }
