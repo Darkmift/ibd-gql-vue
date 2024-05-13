@@ -31,6 +31,16 @@ const buildsResolvers = {
         throw new Error('Failed to fetch build.');
       }
     },
+
+    async buildsGroupedByDay() {
+      try {
+        const results = await buildsService.getBuildsGroupedByDay();
+        return results;
+      } catch (error) {
+        logger.error(error);
+        throw new Error('Failed to fetch builds.');
+      }
+    },
   },
   // Mutation: {
   //   async createBuild(_, { input }) {

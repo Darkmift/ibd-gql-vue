@@ -5,5 +5,6 @@ export const resolvers = {
     builds: (_, args) => buildsResolvers.Query.builds(_, args),
     countBuilds: () => buildsResolvers.Query.countBuilds(),
     build: (_, args) => buildsResolvers.Query.build(_, args),
+    buildsGroupedByDay: () => buildsResolvers.Query.buildsGroupedByDay(),
   },
 };

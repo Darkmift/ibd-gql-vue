@@ -20,12 +20,19 @@ const typeDefs = `#graphql
     warningsNumber: Int
   }
 
+  # Define a model for builds grouped by day
+  type BuildGroupedByDay {
+    day: String
+    count: Int
+  }
+
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each.
   type Query {
     builds(page: Int, limit:Int): [BuildModel]
     countBuilds: Int
     build(buildId:String): BuildModel
+    buildsGroupedByDay: [BuildGroupedByDay]
   }
 `;
 
