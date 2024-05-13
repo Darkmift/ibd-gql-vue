@@ -27,4 +27,19 @@ describe('BuildsService', () => {
     expect(build).toBeDefined();
     expect(build?.buildId).toBe(buildId);
   });
+
+  // get grouped by startTime
+  it('should get builds grouped by startTime', async () => {
+    const results = await service.getBuildsGroupedByDay();
+    expect(results).toBeDefined();
+    expect(results[0]).toHaveProperty('day');
+    expect(results).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          day: expect.any(String),
+          count: expect.any(Number),
+        }),
+      ]),
+    );
+  });
 });

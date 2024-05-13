@@ -1,7 +1,8 @@
 import { IBuild } from '@/types/build';
-import db from '@/drizzle/db';
+import db, { sqlite } from '@/drizzle/db';
 import { builds } from '@/drizzle/db/schema';
 import { count, eq, sql } from 'drizzle-orm';
+import { groupByStartDate } from '@/drizzle/db/queries/groupByStartDate';
 
 export default class BuildsService {
   // insert a build (not in use in exec scope)
@@ -36,6 +37,15 @@ export default class BuildsService {
       .from(builds)
       .limit(limit)
       .offset(page * limit);
+    return results;
+  }
+
+  async getBuildsGroupedByDay() {
+    // const results = await db.select({ builds: sql<IBuild>`builds` }).from(sql`${groupByStartDate}`);
+    const results: { day: string; count: number }[] = await sqlite
+      .prepare(groupByStartDate)
+      .all();
+
     return results;
   }
 }
