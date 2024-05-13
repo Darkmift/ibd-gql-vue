@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { BuildModel } from '@/types'
-import { ref, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import cancelledSvg from '@/assets/svg/cancelled.svg?raw'
 import failedSvg from '@/assets/svg/failed.svg?raw'
 import successSvg from '@/assets/svg/success.svg?raw'
+import { useBuildsStore } from '@/store'
+
+const store = useBuildsStore()
 
 const customSortMap: Record<string, { number: number; string: string }> = {
   buildId: { number: 1, string: 'Build ID' },
@@ -29,183 +32,41 @@ const sortBuilds = (build: BuildModel) => {
     ) as BuildModel
 }
 
-const builds = ref<BuildModel[]>(
-  [
-    {
-      buildId: 1,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 2,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'failed',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 3,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'cancelled',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 4,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 5,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
+onMounted(() => {
+  store.setBuilds(1, 10)
+})
 
-    {
-      buildId: 6,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 7,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'failed',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 8,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'cancelled',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 9,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 10,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    // add 5 more
-    {
-      buildId: 11,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 12,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'failed',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 13,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'cancelled',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 14,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    },
-    {
-      buildId: 15,
-      startTime: '2021-10-01T12:00:00Z',
-      endTime: '2021-10-01T12:30:00Z',
-      status: 'success',
-      caption: 'Build #1',
-      command: 'npm run build',
-      errorsNumber: 0,
-      warningsNumber: 0
-    }
-  ].map((b) => sortBuilds(b as BuildModel))
-)
+const pagination = computed(() => store.pagination)
+const builds = computed(() => store.builds.map((build) => sortBuilds(build)))
 
-const tableKeys = computed(() =>
-  Object.keys(sortBuilds(builds.value[0])).map((k) => customSortMap[k].string)
-)
+const tableKeys = computed(() => {
+  const buildObject = builds.value[0] || {}
+  return Object.keys(sortBuilds(buildObject)).map((k) => customSortMap[k].string)
+})
 
 // a fn that check status and return the right svg
 const SvgImage = (status: string) => {
-  console.log('🚀 ~ SvgImage ~ status:', status)
   switch (status) {
     case 'success':
       return successSvg
     case 'failed':
       return failedSvg
-    case 'cancelled':
+    case 'canceled':
       return cancelledSvg
     default:
       return ''
   }
 }
 
-const count = computed(() => builds.value.length)
+const handlePagination = (action: 'increment' | 'decrement') => {
+  const page =
+    action === 'increment'
+      ? pagination.value.page < 1
+        ? 1
+        : pagination.value.page + 1
+      : pagination.value.page - 1
+  store.setBuilds(page, 10)
+}
 </script>
 
 <template>
@@ -232,7 +93,15 @@ const count = computed(() => builds.value.length)
       </tr>
       <tr>
         <td :colspan="tableKeys.length" class="pagination">
-          <div class="total">{{ count }} <span class="total">total builds</span></div>
+          <div class="pagination-content">
+            <div class="total">{{ pagination.total }} <span class="total">total builds</span></div>
+            <div class="pagination-navs">
+              <button :disabled="pagination.page <= 1" @click="handlePagination('decrement')">
+                &lt;
+              </button>
+              <button @click="handlePagination('increment')">&gt;</button>
+            </div>
+          </div>
         </td>
       </tr>
     </tbody>
@@ -263,14 +132,40 @@ const count = computed(() => builds.value.length)
 }
 
 .pagination {
-  // height: 40px;
+  justify-content: space-between;
   background-color: $bgColorWhite;
   border-radius: 0 0 8px 8px;
   padding: 0 8px;
   font-family: $fontGordita400;
-  .total {
-    font-size: 11px;
-    color: $textColorGrey;
+  .pagination-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    .total {
+      font-size: 11px;
+      color: $textColorGrey;
+    }
+
+    .pagination-navs {
+      button {
+        background-color: rgb(113, 113, 192);
+        border: 1px solid $borderColorGrey;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 12px;
+        color: $textColorGrey;
+        cursor: pointer;
+        &:hover {
+          background-color: $bgColorWhite;
+        }
+        &:disabled {
+          cursor: not-allowed;
+          color: $textColorGrey;
+          background-color: $bgColorWhite;
+        }
+      }
+    }
   }
 }
 table {
