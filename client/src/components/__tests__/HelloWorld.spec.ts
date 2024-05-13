@@ -6,6 +6,7 @@ import HomeView from '../../views/HomeView.vue'
 describe('HelloWorld', () => {
   it('renders properly', () => {
     const wrapper = mount(HomeView)
-    expect(wrapper.text()).toContain('hello')
+    const text = wrapper.text()
+    expect(text).toContain('success1Build')
   })
 })
