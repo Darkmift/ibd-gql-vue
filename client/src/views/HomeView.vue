@@ -2,15 +2,10 @@
 import GraphComponent from '@/components/GraphComponent.vue'
 import TableComponent from '@/components/TableComponent.vue'
 </script>
-<template>
-  <h1>Builds</h1>
+
+<template class="mb-[18px] mt-[22px] text-[26px]">
+  <h1 class="text-[26px]">Builds</h1>
   <GraphComponent />
   <TableComponent />
 </template>
 
-<style lang="scss" scoped>
-h1 {
-  font-size: 26px;
-  margin: 22px 0 18px 0;
-}
-</style>
