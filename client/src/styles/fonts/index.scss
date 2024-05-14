@@ -1,13 +1,12 @@
-@font-face {
-  font-family: 'Gordita';
-  font-weight: 500;
-  src: url('/Gordita Medium.otf') format('otf');
+@layer base {
+  @font-face {
+    font-family: 'Gordita';
+    font-weight: 500;
+    src: url('/Gordita Medium.otf') format('otf');
+  }
+  @font-face {
+    font-family: 'Gordita-light';
+    font-weight: 400;
+    src: url('/Gordita Medium.otf') format('otf');
+  }
 }
-@font-face {
-  font-family: 'Gordita-light';
-  font-weight: 400;
-  src: url('/Gordita Medium.otf') format('otf');
-}
-
-$fontGordita500: 'Gordita', sans-serif;
-$fontGordita400: 'Gordita-light', sans-serif;
