@@ -1,6 +1,9 @@
 {
   "recommendations": [
     "orta.vscode-jest",
-    "vue.volar"
+    "vue.volar",
+    "ms-playwright.playwright",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
   ]
 }

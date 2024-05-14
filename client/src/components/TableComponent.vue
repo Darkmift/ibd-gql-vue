@@ -38,7 +38,7 @@ const sortBuilds = (build: BuildModel) => {
 const pagination = computed(() => store.pagination)
 const builds = computed(() => store.builds.map((build) => sortBuilds(build)))
 const currentPage = computed(() => store.pagination.page)
-const limit = ref(50)
+const limit = ref(15)
 const nextPage = computed(() => {
   const nextPageNumber = pagination.value.page + 1
   return nextPageNumber <= pagination.value.total ? nextPageNumber : null
@@ -79,189 +79,110 @@ const handlePagination = (action: 'increment' | 'decrement') => {
 </script>
 
 <template>
-  <div class="table-fix-head">
-    <table>
-      <thead>
-        <tr>
-          <th v-for="key in tableKeys" :key="key">
-            <span>{{ key }}</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="build in builds" :key="build.buildId">
-          <td v-for="(value, key) in build" :key="key">
-            <div :class="key === 'status' ? `status ${value}` : ''">
-              <div v-if="key === 'status'" class="svg-image" v-html="SvgImage(build.status)"></div>
-              <span>{{ value }}</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td :colspan="tableKeys.length" class="pagination">
-            <div class="pagination-content">
-              <div class="total">
-                {{ pagination.total }} <span class="total">total builds</span>
+  <div class="wrapper">
+    <div class="table-container">
+      <table class="h-1 w-[90vw]">
+        <thead>
+          <tr>
+            <th v-for="key in tableKeys" :key="key">
+              <span>{{ key }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="build in builds" :key="build.buildId">
+            <td v-for="(value, key) in build" :key="key">
+              <div :class="key === 'status' ? `status ${value}` : ''">
+                <div
+                  v-if="key === 'status'"
+                  class="svg-image"
+                  v-html="SvgImage(build.status)"
+                ></div>
+                <span>{{ value }}</span>
               </div>
-              <div class="pagination-navs">
-                <button
-                  :disabled="currentPage <= 1"
-                  @click="handlePagination('decrement')"
-                  v-html="arrowLeftSvg"
-                ></button>
-                <span
-                  :class="{ highlighted: index + 1 === currentPage }"
-                  v-for="index in [currentPage - 1, currentPage]"
-                  :key="index"
-                >
-                  {{ index + 1 }}
-                </span>
-                <button
-                  :disabled="!nextPage"
-                  @click="handlePagination('increment')"
-                  v-html="arrowRightSvg"
-                ></button>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <div class="total">{{ pagination.total }} <span class="total">total builds</span></div>
+      <div class="pagination-navs">
+        <button
+          :disabled="currentPage <= 1"
+          @click="handlePagination('decrement')"
+          v-html="arrowLeftSvg"
+        ></button>
+        <span
+          :class="{ highlighted: index + 1 === currentPage }"
+          v-for="index in [currentPage - 1, currentPage]"
+          :key="index"
+        >
+          {{ index + 1 }}
+        </span>
+        <button
+          :disabled="!nextPage"
+          @click="handlePagination('increment')"
+          v-html="arrowRightSvg"
+        ></button>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.table-fix-head {
-  display: flex;
-  overflow: auto;
-  min-width: 900px;
-  width: 90vw;
-  height: 676px;
-  margin-top: 24px;
-  background-color: $bgColorWhite;
-  padding-bottom: 24px;
-}
+.wrapper {
+  @apply my-5;
 
-table {
-  white-space: nowrap;
-  flex: 1;
-  height: 100%;
-  overflow: scroll;
-  border-radius: 8px;
-  background-color: $headerGrey;
-  border-collapse: collapse;
-  border-style: hidden;
-  border-radius: 8px;
-  box-shadow: 0 0 0 1px $borderColorGrey;
-  color: $textColorGrey;
-  thead {
-    position: sticky;
-    box-shadow: 0 0 0 1px $borderColorGrey;
-    top: 0;
-    th {
-      background-color: $headerGrey;
-      &:first-child {
-        span {
-          padding-left: 20px;
+  .table-container {
+    @apply flex w-[90vw] min-w-[900px] flex-col overflow-auto whitespace-nowrap bg-[theme(colors.background.white)];
+    table {
+      @apply flex-1;
+      thead {
+        @apply sticky top-0 z-10 bg-[theme(colors.background.grey)];
+      }
+      tr {
+        @apply h-10 border-b border-[theme(colors.border.grey)] text-left;
+        td,
+        th {
+          @apply pl-4;
         }
-        padding-left: 0;
-        border-top-left-radius: 8px;
-      }
-      &:last-child {
-        border-top-right-radius: 8px;
-      }
-    }
-  }
-  td,
-  th {
-    height: 40px;
-    text-align: left;
-    padding-left: 20px;
-    font-size: 12px;
-    &:first-child {
-      padding-left: 0;
-    }
-  }
-  tbody {
-    tr {
-      font-size: 16px;
-      border-bottom: 1px solid $borderColorGrey;
-      td {
-        text-align: left;
-        background-color: $bgColorWhite;
+
+        td {
+          &:first-child {
+            @apply pl-0;
+          }
+          .status {
+            @apply flex h-full items-center gap-3 border-l-[3px] border-solid border-l-[theme(colors.background.grey)] pl-3 capitalize leading-8;
+            .svg-image {
+              @apply mb-[2px];
+            }
+            &.success {
+              @apply border-l-[3px] border-solid border-l-[theme(colors.background.green)];
+            }
+            &.failed {
+              @apply border-l-[3px] border-solid border-l-[theme(colors.background.red)];
+            }
+            &.canceled {
+              @apply border-l-[3px] border-solid border-l-[theme(colors.background.grey)];
+            }
+          }
+        }
       }
     }
   }
-}
-
-th:first-child,
-th:last-child {
-  border-radius: none;
-  border-left: none;
-  box-shadow: 0 0 0 5.6rem $bgColorWhite;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  line-height: 32px;
-  padding-left: 20px;
-  height: 100%;
-  text-transform: capitalize;
-  .svg-image {
-    height: 24px;
-    margin-right: 8px;
-  }
-  border-left: 3px solid $borderColorGrey;
-}
-.success {
-  border-left: 3px solid $cellGreen;
-}
-.failed {
-  border-left: 3px solid $cellRed;
-}
-.cancelled {
-  border-left: 3px solid $cellGrey;
-}
-
-.pagination {
-  justify-content: space-between;
-  background-color: $bgColorWhite;
-  border-radius: 0 0 8px 8px;
-  padding: 0 8px;
-  font-family: $fontGordita400;
-  .pagination-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
+  .pagination {
+    @apply flex h-10 w-full items-center justify-between px-2 font-gorditaLight;
     .total {
-      font-size: 11px;
-      color: $textColorGrey;
+      @apply text-[11px] text-[theme(colors.text.grey)];
     }
-
     .pagination-navs {
-      display: flex;
-      gap: 11px;
-      align-items: center;
+      @apply flex items-center gap-[11px];
       .highlighted {
-        padding: 0 4px;
-        color: $textColorWhite;
-        background-color: $textColorGrey;
-        border-radius: 50%;
+        @apply rounded-[50%] bg-[#525765] px-2 py-0 text-[theme(colors.text.white)];
       }
       button {
-        display: flex;
-        align-items: center;
-        border: none;
-        background: none;
-        padding: 0;
-        font-size: 12px;
-        color: rgba(110, 122, 125, 0.4);
-        cursor: pointer;
-        &:disabled {
-          cursor: not-allowed;
-        }
+        @apply flex cursor-pointer items-center border-[none] p-0 text-xs text-[rgba(110,122,125,0.4)] disabled:cursor-not-allowed;
       }
     }
   }
