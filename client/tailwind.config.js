@@ -7,8 +7,9 @@ export default {
     extend: {
       colors: {
         background: {
+          primary: 'rgba(246,250,251,255)',
           white: 'rgba(247, 250, 251, 1)',
-          grey: 'rgba(55, 74, 80, 0.5)',
+          grey: 'rgba(223, 229, 231, 1)',
           tertiary: 'rgba(255, 255, 255, 1)',
           red: 'rgba(225, 40, 40, 1)',
           green: 'rgba(0, 210, 162, 1)'
@@ -22,7 +23,7 @@ export default {
       breakpoints: {
         large: '1624px'
       },
-      fonts: {
+      fontFamily: {
         gordita: ['Gordita', 'sans-serif'],
         gorditaLight: ['Gordita Light', 'sans-serif']
       }
