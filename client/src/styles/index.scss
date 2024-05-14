@@ -9,22 +9,22 @@
 @import 'fonts/index.scss';
 @layer base {
   * {
-    @apply font-gordita box-border;
+    @apply box-border font-gordita;
   }
-  *::-webkit-scrollbar {
-    @apply w-2;
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
   }
   /* Track */
-  *::-webkit-scrollbar-track {
-    @apply rounded-[10px];
+  ::-webkit-scrollbar-track {
+    @apply w-1 h-2 rounded-[10px];
   }
   /* Handle */
-  *::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     @apply rounded-[10px];
     background: rgba(127, 135, 137, 1);
   }
   /* Handle on hover */
-  *::-webkit-scrollbar-thumb:hover {
+  ::-webkit-scrollbar-thumb:hover {
     background: rgba(127, 135, 137, 1);
   }
   #app {

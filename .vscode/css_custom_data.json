@@ -40,6 +40,16 @@
           "url": "https://tailwindcss.com/docs/functions-and-directives#variants"
         }
       ]
+    },
+    {
+      "name": "apply",
+      "description": "The `apply` function allows you to apply a utility to an element from within your CSS:\n```css\n.btn {\n  @apply bg-blue-500 text-white;\n}\n```\n",
+      "references": [
+        {
+          "name": "Tailwind Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives#apply"
+        }
+      ]
     }
   ]
 }
